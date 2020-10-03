@@ -1,12 +1,12 @@
 package cs451;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
+import cs451.parser.Parser;
 
 public class Main {
 
+    /**
+     * Handle shutdown and buffer flush can be done here.
+     */
     private static void handleSignal() {
         //immediately stop network packet processing
         System.out.println("Immediately stopping network packet processing.");
@@ -53,9 +53,14 @@ public class Main {
         Coordinator coordinator = new Coordinator(parser.myId(), parser.barrierIp(), parser.barrierPort(), parser.signalIp(), parser.signalPort());
 
 	System.out.println("Waiting for all processes for finish initialization");
-        coordinator.waitOnBarrier();
+
+
+        System.out.println("threads are running");
+	coordinator.waitOnBarrier();
 
 	System.out.println("Broadcasting messages...");
+
+
 
 	System.out.println("Signaling end of broadcasting messages");
         coordinator.finishedBroadcasting();
